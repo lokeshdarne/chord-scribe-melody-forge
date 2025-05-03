@@ -6,16 +6,24 @@ import { validateChordProgression, getSupportedChords } from '@/utils/midiUtils'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Button } from '@/components/ui/button';
-import { Music, Plus } from 'lucide-react';
+import { Music, Plus, Play, Square } from 'lucide-react';
 import { getRandomChord } from '@/utils/randomChordUtils';
 
 interface ChordInputProps {
   value: string;
   onChange: (value: string) => void;
   isValid: boolean;
+  onPreviewPlay: () => void;
+  isPlaying: boolean;
 }
 
-const ChordInput: React.FC<ChordInputProps> = ({ value, onChange, isValid }) => {
+const ChordInput: React.FC<ChordInputProps> = ({ 
+  value, 
+  onChange, 
+  isValid, 
+  onPreviewPlay,
+  isPlaying 
+}) => {
   const placeholderText = "Enter chord progression (e.g. C G Am F)";
   const supportedChords = getSupportedChords();
   
@@ -30,7 +38,7 @@ const ChordInput: React.FC<ChordInputProps> = ({ value, onChange, isValid }) => 
   };
   
   return (
-    <Card className="w-full bg-card/70 backdrop-blur-sm border-music-primary/20">
+    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Music size={18} className="text-music-primary" />
@@ -51,15 +59,31 @@ const ChordInput: React.FC<ChordInputProps> = ({ value, onChange, isValid }) => 
                 !isValid && value.length > 0 ? 'border-destructive' : 'border-input'
               }`}
             />
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="absolute right-3 bottom-3 bg-card/50 backdrop-blur-sm"
-              onClick={handleAddRandomChord}
-              title="Add a random chord"
-            >
-              <Plus size={16} className="mr-1" /> Random Chord
-            </Button>
+            <div className="absolute right-3 bottom-3 flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-card/50 backdrop-blur-sm"
+                onClick={onPreviewPlay}
+                title={isPlaying ? "Stop preview" : "Preview with piano sound"}
+              >
+                {isPlaying ? (
+                  <Square size={16} className="mr-1" />
+                ) : (
+                  <Play size={16} className="mr-1" />
+                )}
+                {isPlaying ? "Stop" : "Play"}
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                className="bg-card/50 backdrop-blur-sm"
+                onClick={handleAddRandomChord}
+                title="Add a random chord"
+              >
+                <Plus size={16} className="mr-1" /> Random Chord
+              </Button>
+            </div>
           </div>
           {!isValid && value.length > 0 && (
             <p className="text-sm text-destructive">

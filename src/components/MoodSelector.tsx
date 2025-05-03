@@ -25,7 +25,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
   };
   
   return (
-    <Card className="w-full bg-card/70 backdrop-blur-sm border-music-primary/20">
+    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm">
           <Shuffle size={18} className="text-music-primary" />
@@ -45,7 +45,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
               <SelectTrigger id="mood-select" className="w-full">
                 <SelectValue placeholder="Select a mood" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-card border-music-primary/20">
                 {moods.map((mood) => (
                   <SelectItem key={mood} value={mood}>
                     {mood}

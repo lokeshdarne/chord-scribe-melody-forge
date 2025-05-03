@@ -75,3 +75,12 @@
   }
 }
 
+/* SelectContent should have a solid background */
+.SelectContent {
+  @apply bg-popover border-border;
+}
+
+/* Fix for hover card to ensure it's visible */
+.HoverCardContent {
+  @apply bg-popover border-border z-50;
+}

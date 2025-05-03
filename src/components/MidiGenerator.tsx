@@ -5,8 +5,11 @@ import ModeSelector from './ModeSelector';
 import GenerationControls from './GenerationControls';
 import MoodSelector from './MoodSelector';
 import { generateMidi, validateChordProgression } from '@/utils/midiUtils';
+import { playProgression, stopPlayback } from '@/utils/audioPreviewUtils';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
+import { Button } from './ui/button';
+import { Music } from 'lucide-react';
 
 const MidiGenerator: React.FC = () => {
   const [chordProgression, setChordProgression] = useState<string>('');
@@ -17,6 +20,7 @@ const MidiGenerator: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isChordProgressionValid, setIsChordProgressionValid] = useState<boolean>(true);
   const [selectedMood, setSelectedMood] = useState<string>("Happy");
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const { toast } = useToast();
 
   // Validate chord progression when it changes
@@ -87,50 +91,96 @@ const MidiGenerator: React.FC = () => {
     }, 100);
   };
 
+  const handlePreviewPlay = async () => {
+    if (!isChordProgressionValid || chordProgression.trim() === '') {
+      toast({
+        title: "Invalid Chord Progression",
+        description: "Please enter a valid chord progression to preview.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (isPlaying) {
+      stopPlayback();
+      setIsPlaying(false);
+      return;
+    }
+
+    setIsPlaying(true);
+    toast({
+      title: "Playing Preview",
+      description: "Playing chord progression with piano sound",
+    });
+
+    try {
+      await playProgression(chordProgression, tempo);
+      // Reset play state after finished
+      setTimeout(() => {
+        setIsPlaying(false);
+      }, (chordProgression.split(/\s+/).length * (60 / tempo) * 4 * 1000) + 500);
+    } catch (error) {
+      console.error('Error playing preview:', error);
+      setIsPlaying(false);
+    }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-4">
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold gradient-heading">MIDI Chord Progression Generator</h1>
-        <p className="text-muted-foreground">Create MIDI files from chord progressions directly in your browser</p>
-      </div>
-      
-      <Separator className="bg-music-primary/30" />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-6">
-          <ChordInput 
-            value={chordProgression}
-            onChange={setChordProgression}
-            isValid={isChordProgressionValid}
-          />
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ModeSelector 
-              mode={mode}
-              onChange={setMode}
+    <div className="min-h-screen bg-gradient-to-br from-music-background via-music-background/95 to-music-background/90 py-12">
+      <div className="max-w-4xl mx-auto space-y-8 p-4">
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold gradient-heading">MIDI Chord Progression Generator</h1>
+          <p className="text-muted-foreground">Create MIDI files from chord progressions directly in your browser</p>
+        </div>
+        
+        <Separator className="bg-music-primary/30" />
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-6">
+            <ChordInput 
+              value={chordProgression}
+              onChange={setChordProgression}
+              isValid={isChordProgressionValid}
+              onPreviewPlay={handlePreviewPlay}
+              isPlaying={isPlaying}
             />
             
-            <MoodSelector
-              selectedMood={selectedMood}
-              onMoodChange={setSelectedMood}
-              onRandomProgression={handleRandomProgression}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <ModeSelector 
+                mode={mode}
+                onChange={setMode}
+              />
+              
+              <MoodSelector
+                selectedMood={selectedMood}
+                onMoodChange={setSelectedMood}
+                onRandomProgression={handleRandomProgression}
+              />
+            </div>
+          </div>
+          
+          <div>
+            <GenerationControls 
+              tempo={tempo}
+              onTempoChange={setTempo}
+              octaveShift={octaveShift}
+              onOctaveShiftChange={setOctaveShift}
+              onGenerate={handleGenerateMidi}
+              isGenerating={isGenerating}
+              canDownload={!!generatedMidi}
+              onDownload={handleDownload}
+              isValid={isChordProgressionValid && chordProgression.trim() !== ''}
             />
           </div>
         </div>
         
-        <div>
-          <GenerationControls 
-            tempo={tempo}
-            onTempoChange={setTempo}
-            octaveShift={octaveShift}
-            onOctaveShiftChange={setOctaveShift}
-            onGenerate={handleGenerateMidi}
-            isGenerating={isGenerating}
-            canDownload={!!generatedMidi}
-            onDownload={handleDownload}
-            isValid={isChordProgressionValid && chordProgression.trim() !== ''}
-          />
-        </div>
+        <footer className="mt-8 text-center text-sm text-muted-foreground">
+          <p>Developed by Lokesh Darne</p>
+          <p className="mt-1 flex items-center justify-center gap-1">
+            <Music size={14} />
+            <span>Built with React & Tone.js</span>
+          </p>
+        </footer>
       </div>
     </div>
   );

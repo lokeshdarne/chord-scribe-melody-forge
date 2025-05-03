@@ -12,9 +12,9 @@ interface ModeSelectorProps {
 
 const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange }) => {
   return (
-    <Card className="w-full bg-card/70 backdrop-blur-sm border-music-primary/20">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-sm">
           <Radio size={18} className="text-music-primary" />
           Mode Selection
         </CardTitle>
@@ -22,7 +22,7 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange }) => {
           Choose how to generate your MIDI file
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <RadioGroup 
           value={mode} 
           onValueChange={(value) => onChange(value as 'chords' | 'melody')}
