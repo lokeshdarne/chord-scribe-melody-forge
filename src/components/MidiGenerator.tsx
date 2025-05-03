@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ChordInput from './ChordInput';
 import ModeSelector from './ModeSelector';
 import GenerationControls from './GenerationControls';
+import MoodSelector from './MoodSelector';
 import { generateMidi, validateChordProgression } from '@/utils/midiUtils';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
@@ -15,6 +16,7 @@ const MidiGenerator: React.FC = () => {
   const [generatedMidi, setGeneratedMidi] = useState<Blob | null>(null);
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [isChordProgressionValid, setIsChordProgressionValid] = useState<boolean>(true);
+  const [selectedMood, setSelectedMood] = useState<string>("Happy");
   const { toast } = useToast();
 
   // Validate chord progression when it changes
@@ -60,6 +62,14 @@ const MidiGenerator: React.FC = () => {
     }, 500);
   };
 
+  const handleRandomProgression = (progression: string) => {
+    setChordProgression(progression);
+    toast({
+      title: "Random Progression Added",
+      description: `Created a ${selectedMood} chord progression.`
+    });
+  };
+
   const handleDownload = () => {
     if (!generatedMidi) return;
     
@@ -94,10 +104,18 @@ const MidiGenerator: React.FC = () => {
             isValid={isChordProgressionValid}
           />
           
-          <ModeSelector 
-            mode={mode}
-            onChange={setMode}
-          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <ModeSelector 
+              mode={mode}
+              onChange={setMode}
+            />
+            
+            <MoodSelector
+              selectedMood={selectedMood}
+              onMoodChange={setSelectedMood}
+              onRandomProgression={handleRandomProgression}
+            />
+          </div>
         </div>
         
         <div>

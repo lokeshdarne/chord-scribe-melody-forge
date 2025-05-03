@@ -43,6 +43,14 @@
     --sidebar-accent-foreground: 240 5% 85%;
     --sidebar-border: 250 15% 20%;
     --sidebar-ring: 255 80% 75%;
+    
+    /* Music theme colors */
+    --music-background: 250 20% 12%;
+    --music-foreground: 240 10% 98%;
+    --music-primary: 255 80% 75%;
+    --music-secondary: 280 75% 60%;
+    --music-accent: 267 100% 78%;
+    --music-light: 264 100% 85%;
   }
 }
 
@@ -66,3 +74,4 @@
     @apply bg-gradient-to-r from-music-light via-music-primary to-music-accent bg-clip-text text-transparent;
   }
 }
+

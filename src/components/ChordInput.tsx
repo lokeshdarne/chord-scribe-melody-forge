@@ -6,7 +6,8 @@ import { validateChordProgression, getSupportedChords } from '@/utils/midiUtils'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Button } from '@/components/ui/button';
-import { Music } from 'lucide-react';
+import { Music, Plus } from 'lucide-react';
+import { getRandomChord } from '@/utils/randomChordUtils';
 
 interface ChordInputProps {
   value: string;
@@ -21,6 +22,13 @@ const ChordInput: React.FC<ChordInputProps> = ({ value, onChange, isValid }) => 
   // Filter to common chord types for display
   const commonChords = ["C", "G", "D", "A", "E", "F", "Dm", "Em", "Am", "G7", "Cmaj7"];
   
+  // Handler for adding a random chord
+  const handleAddRandomChord = () => {
+    const randomChord = getRandomChord();
+    const newValue = value ? `${value} ${randomChord}` : randomChord;
+    onChange(newValue);
+  };
+  
   return (
     <Card className="w-full bg-card/70 backdrop-blur-sm border-music-primary/20">
       <CardHeader>
@@ -34,14 +42,25 @@ const ChordInput: React.FC<ChordInputProps> = ({ value, onChange, isValid }) => 
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
-          <Textarea
-            placeholder={placeholderText}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className={`min-h-24 bg-muted/30 chord-input-placeholder resize-none ${
-              !isValid && value.length > 0 ? 'border-destructive' : 'border-input'
-            }`}
-          />
+          <div className="relative">
+            <Textarea
+              placeholder={placeholderText}
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              className={`min-h-24 bg-muted/30 chord-input-placeholder resize-none ${
+                !isValid && value.length > 0 ? 'border-destructive' : 'border-input'
+              }`}
+            />
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="absolute right-3 bottom-3 bg-card/50 backdrop-blur-sm"
+              onClick={handleAddRandomChord}
+              title="Add a random chord"
+            >
+              <Plus size={16} className="mr-1" /> Random Chord
+            </Button>
+          </div>
           {!isValid && value.length > 0 && (
             <p className="text-sm text-destructive">
               Invalid chord progression. Please use supported chords.
