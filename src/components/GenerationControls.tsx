@@ -30,7 +30,7 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
   isValid
 }) => {
   return (
-    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
+    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20 flex flex-col">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <ToggleRight size={18} className="text-music-primary" />
@@ -40,11 +40,11 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
           Adjust parameters and generate your MIDI
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-8 flex-1">
         <div className="space-y-2">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <Label htmlFor="tempo">Tempo (BPM)</Label>
-            <span className="text-sm font-medium">{tempo}</span>
+            <span className="text-sm font-medium bg-muted/30 px-2 py-1 rounded-md">{tempo}</span>
           </div>
           <Slider
             id="tempo"
@@ -58,9 +58,9 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
         </div>
         
         <div className="space-y-2">
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <Label htmlFor="octave">Octave Shift</Label>
-            <span className="text-sm font-medium">
+            <span className="text-sm font-medium bg-muted/30 px-2 py-1 rounded-md">
               {octaveShift > 0 ? `+${octaveShift}` : octaveShift}
             </span>
           </div>
@@ -75,7 +75,7 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
           />
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between gap-4 mt-auto">
+      <CardFooter className="flex flex-col sm:flex-row gap-4 mt-auto pt-4 pb-4">
         <Button 
           onClick={onGenerate} 
           disabled={isGenerating || !isValid}
@@ -87,8 +87,10 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
         <Button
           onClick={onDownload}
           disabled={!canDownload}
-          variant={canDownload ? "default" : "outline"}
-          className={`w-full ${canDownload ? "bg-music-primary hover:bg-music-primary/90 text-primary-foreground" : ""}`}
+          variant="outline"
+          className={`w-full ${canDownload 
+            ? "bg-music-primary hover:bg-music-primary/90 text-primary-foreground border-music-primary/50" 
+            : "bg-muted/20"}`}
         >
           <Download className="mr-2 h-4 w-4" />
           Download

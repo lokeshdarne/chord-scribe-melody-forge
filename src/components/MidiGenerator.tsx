@@ -145,36 +145,30 @@ const MidiGenerator: React.FC = () => {
             />
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="h-full flex">
-                <ModeSelector 
-                  mode={mode}
-                  onChange={setMode}
-                />
-              </div>
+              <ModeSelector 
+                mode={mode}
+                onChange={setMode}
+              />
               
-              <div className="h-full flex">
-                <MoodSelector
-                  selectedMood={selectedMood}
-                  onMoodChange={setSelectedMood}
-                  onRandomProgression={handleRandomProgression}
-                />
-              </div>
+              <MoodSelector
+                selectedMood={selectedMood}
+                onMoodChange={setSelectedMood}
+                onRandomProgression={handleRandomProgression}
+              />
             </div>
           </div>
           
-          <div className="h-full flex">
-            <GenerationControls 
-              tempo={tempo}
-              onTempoChange={setTempo}
-              octaveShift={octaveShift}
-              onOctaveShiftChange={setOctaveShift}
-              onGenerate={handleGenerateMidi}
-              isGenerating={isGenerating}
-              canDownload={!!generatedMidi}
-              onDownload={handleDownload}
-              isValid={isChordProgressionValid && chordProgression.trim() !== ''}
-            />
-          </div>
+          <GenerationControls 
+            tempo={tempo}
+            onTempoChange={setTempo}
+            octaveShift={octaveShift}
+            onOctaveShiftChange={setOctaveShift}
+            onGenerate={handleGenerateMidi}
+            isGenerating={isGenerating}
+            canDownload={!!generatedMidi}
+            onDownload={handleDownload}
+            isValid={isChordProgressionValid && chordProgression.trim() !== ''}
+          />
         </div>
         
         <footer className="mt-12 text-center text-sm text-muted-foreground border-t border-music-primary/20 pt-4">

@@ -22,7 +22,7 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange }) => {
           Choose how to generate your MIDI file
         </CardDescription>
       </CardHeader>
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 pb-4">
         <RadioGroup 
           value={mode} 
           onValueChange={(value) => onChange(value as 'chords' | 'melody')}

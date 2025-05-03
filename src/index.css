@@ -77,15 +77,40 @@
 
 /* SelectContent should have a solid background */
 .SelectContent {
-  @apply bg-popover border-border;
+  @apply bg-popover border-border !important;
 }
 
 /* Fix for hover card to ensure it's visible */
 .HoverCardContent {
-  @apply bg-popover border-border z-50;
+  @apply bg-popover border-border z-[100] !important;
 }
 
 /* Style the dropdown to ensure it appears on top */
 [data-radix-popper-content-wrapper] {
   z-index: 999 !important;
+}
+
+/* Ensure consistent card heights */
+.card {
+  height: 100%;
+}
+
+/* Fix for slider track appearance */
+.radix-slider-track {
+  @apply bg-muted !important;
+}
+
+/* Ensure buttons maintain equal height */
+.button-equal-height {
+  height: 40px;
+}
+
+/* Fix modal and popup z-indexes */
+.radix-state-open:focus {
+  box-shadow: none !important;
+}
+
+/* Fix select trigger background */
+[data-radix-select-trigger] {
+  background-color: hsl(var(--popover)) !important;
 }

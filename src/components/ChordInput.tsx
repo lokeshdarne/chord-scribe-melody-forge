@@ -100,7 +100,7 @@ const ChordInput: React.FC<ChordInputProps> = ({
               <span>Supported chords</span>
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="w-80 bg-popover border-music-primary/20 z-50">
+          <HoverCardContent className="w-80 bg-popover border-music-primary/20">
             <div className="space-y-2">
               <h4 className="font-medium">Supported Chords</h4>
               <div className="flex flex-wrap gap-1">
