@@ -6,7 +6,7 @@ import { validateChordProgression, getSupportedChords } from '@/utils/midiUtils'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Button } from '@/components/ui/button';
-import { Music, Plus, Play, Square } from 'lucide-react';
+import { Music, Plus, Play, Square, HelpCircle } from 'lucide-react';
 import { getRandomChord } from '@/utils/randomChordUtils';
 
 interface ChordInputProps {
@@ -92,14 +92,15 @@ const ChordInput: React.FC<ChordInputProps> = ({
           )}
         </div>
       </CardContent>
-      <CardFooter className="flex-col items-start space-y-2">
+      <CardFooter className="flex justify-start pt-2">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <Button variant="link" className="text-sm px-0 text-muted-foreground">
-              View supported chords
+            <Button variant="ghost" size="sm" className="text-muted-foreground h-8 px-2 flex items-center gap-1">
+              <HelpCircle size={14} />
+              <span>Supported chords</span>
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="w-80">
+          <HoverCardContent className="w-80 bg-popover border-music-primary/20 z-50">
             <div className="space-y-2">
               <h4 className="font-medium">Supported Chords</h4>
               <div className="flex flex-wrap gap-1">

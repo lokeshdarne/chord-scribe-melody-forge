@@ -36,7 +36,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           <div className="space-y-2">
             <label htmlFor="mood-select" className="text-sm font-medium">
               Select Mood
@@ -45,7 +45,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
               <SelectTrigger id="mood-select" className="w-full">
                 <SelectValue placeholder="Select a mood" />
               </SelectTrigger>
-              <SelectContent className="bg-card border-music-primary/20">
+              <SelectContent className="bg-popover border-music-primary/20 z-50">
                 {moods.map((mood) => (
                   <SelectItem key={mood} value={mood}>
                     {mood}
@@ -57,7 +57,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
           
           <Button 
             onClick={handleGenerateRandomProgression} 
-            className="w-full bg-music-secondary hover:bg-music-secondary/90 text-white"
+            className="w-full bg-music-secondary hover:bg-music-secondary/90 text-white mt-2"
           >
             <Shuffle className="mr-2 h-4 w-4" />
             Generate Random Progression

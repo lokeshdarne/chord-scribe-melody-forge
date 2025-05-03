@@ -8,7 +8,6 @@ import { generateMidi, validateChordProgression } from '@/utils/midiUtils';
 import { playProgression, stopPlayback } from '@/utils/audioPreviewUtils';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
-import { Button } from './ui/button';
 import { Music } from 'lucide-react';
 
 const MidiGenerator: React.FC = () => {
@@ -126,8 +125,8 @@ const MidiGenerator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-music-background via-music-background/95 to-music-background/90 py-12">
-      <div className="max-w-4xl mx-auto space-y-8 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-music-background via-music-background/95 to-music-background/90 py-12 px-4">
+      <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold gradient-heading">MIDI Chord Progression Generator</h1>
           <p className="text-muted-foreground">Create MIDI files from chord progressions directly in your browser</p>
@@ -146,20 +145,24 @@ const MidiGenerator: React.FC = () => {
             />
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <ModeSelector 
-                mode={mode}
-                onChange={setMode}
-              />
+              <div className="h-full flex">
+                <ModeSelector 
+                  mode={mode}
+                  onChange={setMode}
+                />
+              </div>
               
-              <MoodSelector
-                selectedMood={selectedMood}
-                onMoodChange={setSelectedMood}
-                onRandomProgression={handleRandomProgression}
-              />
+              <div className="h-full flex">
+                <MoodSelector
+                  selectedMood={selectedMood}
+                  onMoodChange={setSelectedMood}
+                  onRandomProgression={handleRandomProgression}
+                />
+              </div>
             </div>
           </div>
           
-          <div>
+          <div className="h-full flex">
             <GenerationControls 
               tempo={tempo}
               onTempoChange={setTempo}
@@ -174,7 +177,7 @@ const MidiGenerator: React.FC = () => {
           </div>
         </div>
         
-        <footer className="mt-8 text-center text-sm text-muted-foreground">
+        <footer className="mt-12 text-center text-sm text-muted-foreground border-t border-music-primary/20 pt-4">
           <p>Developed by Lokesh Darne</p>
           <p className="mt-1 flex items-center justify-center gap-1">
             <Music size={14} />

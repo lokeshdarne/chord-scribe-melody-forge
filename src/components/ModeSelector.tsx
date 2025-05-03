@@ -26,18 +26,18 @@ const ModeSelector: React.FC<ModeSelectorProps> = ({ mode, onChange }) => {
         <RadioGroup 
           value={mode} 
           onValueChange={(value) => onChange(value as 'chords' | 'melody')}
-          className="flex flex-col space-y-2"
+          className="flex flex-col space-y-3"
         >
-          <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted/30 transition-colors">
-            <RadioGroupItem value="chords" id="chords" />
+          <div className="flex items-start space-x-2 rounded-md border p-3 hover:bg-muted/30 transition-colors">
+            <RadioGroupItem value="chords" id="chords" className="mt-1" />
             <Label htmlFor="chords" className="flex flex-col cursor-pointer">
               <span className="font-medium">Full Chords</span>
               <span className="text-muted-foreground text-sm">Generate complete chords with all notes</span>
             </Label>
           </div>
           
-          <div className="flex items-center space-x-2 rounded-md border p-3 hover:bg-muted/30 transition-colors">
-            <RadioGroupItem value="melody" id="melody" />
+          <div className="flex items-start space-x-2 rounded-md border p-3 hover:bg-muted/30 transition-colors">
+            <RadioGroupItem value="melody" id="melody" className="mt-1" />
             <Label htmlFor="melody" className="flex flex-col cursor-pointer">
               <span className="font-medium">Melody</span>
               <span className="text-muted-foreground text-sm">Generate a melody based on the chord progression</span>

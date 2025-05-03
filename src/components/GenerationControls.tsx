@@ -30,7 +30,7 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
   isValid
 }) => {
   return (
-    <Card className="w-full bg-card/70 backdrop-blur-sm border-music-primary/20">
+    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <ToggleRight size={18} className="text-music-primary" />
@@ -75,7 +75,7 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
           />
         </div>
       </CardContent>
-      <CardFooter className="flex justify-between gap-2">
+      <CardFooter className="flex justify-between gap-4 mt-auto">
         <Button 
           onClick={onGenerate} 
           disabled={isGenerating || !isValid}
@@ -87,8 +87,8 @@ const GenerationControls: React.FC<GenerationControlsProps> = ({
         <Button
           onClick={onDownload}
           disabled={!canDownload}
-          variant="outline"
-          className="w-full"
+          variant={canDownload ? "default" : "outline"}
+          className={`w-full ${canDownload ? "bg-music-primary hover:bg-music-primary/90 text-primary-foreground" : ""}`}
         >
           <Download className="mr-2 h-4 w-4" />
           Download

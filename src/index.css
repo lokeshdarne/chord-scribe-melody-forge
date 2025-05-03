@@ -84,3 +84,8 @@
 .HoverCardContent {
   @apply bg-popover border-border z-50;
 }
+
+/* Style the dropdown to ensure it appears on top */
+[data-radix-popper-content-wrapper] {
+  z-index: 999 !important;
+}
