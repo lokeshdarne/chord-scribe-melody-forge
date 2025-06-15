@@ -25,7 +25,7 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
   };
   
   return (
-    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20 flex flex-col">
+    <Card className="w-full h-full flex flex-col justify-between bg-card/70 backdrop-blur-sm border-music-primary/20 rounded-xl shadow p-6 min-h-[310px]">
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-sm">
           <Shuffle size={18} className="text-music-primary" />
@@ -35,8 +35,8 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
           Generate chord progressions by mood
         </CardDescription>
       </CardHeader>
-      <CardContent className="pt-0 pb-4 flex-1 flex flex-col">
-        <div className="flex flex-col gap-4 flex-1">
+      <CardContent className="flex flex-1 flex-col justify-between pt-0 pb-0">
+        <div className="flex-1 flex flex-col gap-6">
           <div className="space-y-2">
             <label htmlFor="mood-select" className="text-sm font-medium">
               Select Mood
@@ -54,16 +54,15 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
               </SelectContent>
             </Select>
           </div>
-          
-          <div className="mt-auto pt-4">
-            <Button 
-              onClick={handleGenerateRandomProgression} 
-              className="w-full bg-music-secondary hover:bg-music-secondary/90 text-white"
-            >
-              <Shuffle className="mr-2 h-4 w-4" />
-              Generate Random Progression
-            </Button>
-          </div>
+        </div>
+        <div className="pt-6">
+          <Button 
+            onClick={handleGenerateRandomProgression} 
+            className="w-full bg-music-secondary hover:bg-music-secondary/90 text-white text-base py-3 rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-music-primary transition"
+          >
+            <Shuffle className="mr-2 h-4 w-4" />
+            Generate Random Progression
+          </Button>
         </div>
       </CardContent>
     </Card>
@@ -71,3 +70,4 @@ const MoodSelector: React.FC<MoodSelectorProps> = ({
 };
 
 export default MoodSelector;
+
