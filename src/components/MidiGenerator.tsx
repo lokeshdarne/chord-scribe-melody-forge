@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import ChordInput from './ChordInput';
 import ModeSelector from './ModeSelector';
@@ -126,12 +127,12 @@ const MidiGenerator: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-music-background via-music-background/95 to-music-background/90 py-12 px-4 flex flex-col">
       <div className="max-w-4xl mx-auto space-y-8 flex-grow">
-        <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold gradient-heading">MIDI Chord Progression Generator</h1>
-          <p className="text-muted-foreground">Create MIDI files from chord progressions directly in your browser</p>
+        <div className="text-center space-y-3">
+          <h1 className="text-4xl font-bold gradient-heading">MIDI Chord Progression Generator</h1>
+          <p className="text-lg text-foreground/90">Create MIDI files from chord progressions directly in your browser</p>
         </div>
         
-        <Separator className="bg-music-primary/30" />
+        <Separator className="bg-music-primary/40" />
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-6">
@@ -171,10 +172,10 @@ const MidiGenerator: React.FC = () => {
         </div>
       </div>
       
-      <footer className="mt-auto text-center text-sm text-muted-foreground border-t border-music-primary/20 pt-4">
-        <p>Developed by Lokesh Darne</p>
-        <p className="mt-1 flex items-center justify-center gap-1">
-          <Music size={14} />
+      <footer className="mt-auto text-center text-sm text-foreground/80 border-t border-music-primary/30 pt-6 mt-12">
+        <p className="font-medium">Developed by Lokesh Darne</p>
+        <p className="mt-2 flex items-center justify-center gap-2">
+          <Music size={16} className="text-music-primary" />
           <span>Built with React & Tone.js</span>
         </p>
       </footer>

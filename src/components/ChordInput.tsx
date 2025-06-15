@@ -38,55 +38,55 @@ const ChordInput: React.FC<ChordInputProps> = ({
   };
   
   return (
-    <Card className="w-full h-full bg-card/70 backdrop-blur-sm border-music-primary/20">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Music size={18} className="text-music-primary" />
+    <Card className="w-full h-full bg-card/90 backdrop-blur-sm border-border/60 shadow-lg">
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2 text-lg font-semibold text-card-foreground">
+          <Music size={20} className="text-music-primary" />
           Chord Progression
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-base text-muted-foreground/90">
           Enter your chord progression separated by spaces
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="relative">
             <Textarea
               placeholder={placeholderText}
               value={value}
               onChange={(e) => onChange(e.target.value)}
-              className={`min-h-24 bg-muted/30 chord-input-placeholder resize-none ${
-                !isValid && value.length > 0 ? 'border-destructive' : 'border-input'
+              className={`min-h-24 bg-card/80 border-border/60 text-card-foreground placeholder:text-muted-foreground/70 resize-none text-base ${
+                !isValid && value.length > 0 ? 'border-destructive focus:border-destructive' : 'focus:border-primary'
               }`}
             />
             <div className="absolute right-3 bottom-3 flex gap-2">
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-card/50 backdrop-blur-sm"
+                className="bg-card/90 backdrop-blur-sm border-border/60 text-card-foreground hover:bg-muted/80 hover:text-foreground shadow-sm"
                 onClick={onPreviewPlay}
                 title={isPlaying ? "Stop preview" : "Preview with piano sound"}
               >
                 {isPlaying ? (
-                  <Square size={16} className="mr-1" />
+                  <Square size={16} className="mr-1.5" />
                 ) : (
-                  <Play size={16} className="mr-1" />
+                  <Play size={16} className="mr-1.5" />
                 )}
                 {isPlaying ? "Stop" : "Play"}
               </Button>
               <Button 
                 variant="outline" 
                 size="sm"
-                className="bg-card/50 backdrop-blur-sm"
+                className="bg-card/90 backdrop-blur-sm border-border/60 text-card-foreground hover:bg-muted/80 hover:text-foreground shadow-sm"
                 onClick={handleAddRandomChord}
                 title="Add a random chord"
               >
-                <Plus size={16} className="mr-1" /> Random Chord
+                <Plus size={16} className="mr-1.5" /> Random
               </Button>
             </div>
           </div>
           {!isValid && value.length > 0 && (
-            <p className="text-sm text-destructive">
+            <p className="text-sm text-destructive font-medium">
               Invalid chord progression. Please use supported chords.
             </p>
           )}
@@ -95,28 +95,28 @@ const ChordInput: React.FC<ChordInputProps> = ({
       <CardFooter className="flex justify-start pt-2">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <Button variant="ghost" size="sm" className="text-muted-foreground h-8 px-2 flex items-center gap-1">
+            <Button variant="ghost" size="sm" className="text-muted-foreground/80 hover:text-foreground h-8 px-2 flex items-center gap-1.5">
               <HelpCircle size={14} />
               <span>Supported chords</span>
             </Button>
           </HoverCardTrigger>
-          <HoverCardContent className="w-80 bg-popover border-music-primary/20">
-            <div className="space-y-2">
-              <h4 className="font-medium">Supported Chords</h4>
-              <div className="flex flex-wrap gap-1">
+          <HoverCardContent className="w-80 bg-card border-border/60 shadow-lg">
+            <div className="space-y-3">
+              <h4 className="font-semibold text-card-foreground">Supported Chords</h4>
+              <div className="flex flex-wrap gap-1.5">
                 {commonChords.map((chord) => (
                   <span 
                     key={chord} 
-                    className="inline-block bg-muted px-2 py-1 rounded text-xs"
+                    className="inline-block bg-muted/80 text-muted-foreground px-2.5 py-1 rounded text-xs font-medium"
                   >
                     {chord}
                   </span>
                 ))}
-                <span className="inline-block bg-muted px-2 py-1 rounded text-xs">
+                <span className="inline-block bg-muted/80 text-muted-foreground px-2.5 py-1 rounded text-xs font-medium">
                   + more...
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground pt-1">
+              <p className="text-xs text-muted-foreground/80 pt-1">
                 Supports major, minor, 7th, and major 7th chords in all keys
               </p>
             </div>

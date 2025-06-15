@@ -8,20 +8,20 @@
     --background: 250 20% 12%;
     --foreground: 240 10% 98%;
 
-    --card: 250 15% 16%;
-    --card-foreground: 240 10% 98%;
+    --card: 250 15% 18%;
+    --card-foreground: 240 5% 95%;
 
-    --popover: 250 15% 16%;
-    --popover-foreground: 240 10% 98%;
+    --popover: 250 15% 18%;
+    --popover-foreground: 240 5% 95%;
 
     --primary: 255 80% 75%;
     --primary-foreground: 240 5% 10%;
 
-    --secondary: 260 40% 55%;
+    --secondary: 260 40% 65%;
     --secondary-foreground: 240 10% 98%;
 
-    --muted: 250 10% 25%;
-    --muted-foreground: 240 5% 75%;
+    --muted: 250 10% 28%;
+    --muted-foreground: 240 5% 85%;
 
     --accent: 267 100% 78%;
     --accent-foreground: 240 5% 10%;
@@ -29,8 +29,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 250 15% 20%;
-    --input: 250 15% 20%;
+    --border: 250 15% 25%;
+    --input: 250 15% 22%;
     --ring: 255 80% 75%;
 
     --radius: 0.5rem;
@@ -44,11 +44,11 @@
     --sidebar-border: 250 15% 20%;
     --sidebar-ring: 255 80% 75%;
     
-    /* Music theme colors */
+    /* Music theme colors - improved contrast */
     --music-background: 250 20% 12%;
     --music-foreground: 240 10% 98%;
     --music-primary: 255 80% 75%;
-    --music-secondary: 280 75% 60%;
+    --music-secondary: 280 75% 70%;
     --music-accent: 267 100% 78%;
     --music-light: 264 100% 85%;
   }
@@ -67,25 +67,34 @@
 
 @layer components {
   .chord-input-placeholder::placeholder {
-    @apply text-muted-foreground opacity-60;
+    @apply text-muted-foreground/80 opacity-80;
   }
   
   .gradient-heading {
     @apply bg-gradient-to-r from-music-light via-music-primary to-music-accent bg-clip-text text-transparent;
   }
+  
+  /* Improved contrast for better readability */
+  .high-contrast-text {
+    @apply text-foreground;
+  }
+  
+  .improved-muted {
+    @apply text-muted-foreground/90;
+  }
 }
 
-/* SelectContent should have a solid background */
+/* SelectContent should have a solid background with better contrast */
 .SelectContent {
-  @apply bg-popover border-border !important;
+  @apply bg-card border-border !important;
 }
 
-/* Fix for hover card to ensure it's visible */
+/* Fix for hover card to ensure it's visible with better contrast */
 .HoverCardContent {
-  @apply bg-popover border-border z-[100] !important;
+  @apply bg-card border-border z-[100] !important;
 }
 
-/* Style the dropdown to ensure it appears on top */
+/* Style the dropdown to ensure it appears on top with better contrast */
 [data-radix-popper-content-wrapper] {
   z-index: 999 !important;
 }
@@ -95,9 +104,9 @@
   height: 100%;
 }
 
-/* Fix for slider track appearance */
+/* Fix for slider track appearance with better contrast */
 .radix-slider-track {
-  @apply bg-muted !important;
+  @apply bg-muted/60 !important;
 }
 
 /* Ensure buttons maintain equal height */
@@ -110,7 +119,31 @@
   box-shadow: none !important;
 }
 
-/* Fix select trigger background */
+/* Fix select trigger background with better contrast */
 [data-radix-select-trigger] {
-  background-color: hsl(var(--popover)) !important;
+  background-color: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Improved button styling for better visibility */
+.button-improved {
+  @apply border border-border/50 shadow-sm;
+}
+
+/* Better input styling */
+.input-improved {
+  @apply bg-card border-border/60 text-card-foreground;
+}
+
+/* Slider improvements */
+.slider-improved .radix-slider-track {
+  @apply bg-muted/80 h-2;
+}
+
+.slider-improved .radix-slider-range {
+  @apply bg-primary;
+}
+
+.slider-improved .radix-slider-thumb {
+  @apply bg-background border-2 border-primary shadow-md;
 }
